@@ -12,6 +12,6 @@ RUN go get -u github.com/gorilla/websocket
 
 EXPOSE 8080
 
-RUN go build
+RUN go get
 
 CMD ["go run", "&"]
