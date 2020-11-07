@@ -1,12 +1,17 @@
 FROM golang:latest
 
-RUN mkdir -p /usr/src/support/
-WORKDIR /usr/src/support/
+ENV USR_PATH = /usr/
+ENV GOPATH = ${USR_PATH}go/
+ENV CONTAINER_PATH = ${USR_PATH}src/support/
 
-COPY . /usr/src/support/
+RUN mkdir -p ${CONTAINER_PATH}
+WORKDIR ${CONTAINER_PATH}
+
+COPY . ${CONTAINER_PATH}
+
+RUN go get -u github.com/gorilla/mux && \
+    go get -u github.com/gorilla/websocket
 
 EXPOSE 8080
 
-RUN go build main.go
-
-CMD ["./main", "&"]
+CMD ["go", "run", "main.go", "&"]
