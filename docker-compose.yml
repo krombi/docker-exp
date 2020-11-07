@@ -8,4 +8,4 @@ services:
       - 80:8080
     hostname: exp.gocrm.ru
     volumes:
-      - ./storage:/usr/src/support/storage
+      - ./main/storage:/usr/src/support/storage
