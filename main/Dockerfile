@@ -1,11 +1,9 @@
 FROM golang:latest
 
-ENV CONTAINER_PATH = /usr/src/support/
+RUN mkdir -p /usr/src/support/
+WORKDIR /usr/src/support/
 
-RUN mkdir -p ${CONTAINER_PATH}
-WORKDIR ${CONTAINER_PATH}
-
-COPY . ${CONTAINER_PATH}
+COPY . /usr/src/support/
 
 RUN go get -u github.com/gorilla/mux
 RUN go get -u github.com/gorilla/websocket
