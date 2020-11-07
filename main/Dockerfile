@@ -1,9 +1,7 @@
 FROM golang:latest
 
 ENV USR_PATH = /usr/
-ENV GOPATH = ${USR_PATH}go/
-
-RUN mkdir -p ${GOPATH}
+ENV GOPATH = ${USR_PATH}
 
 ENV CONTAINER_PATH = ${USR_PATH}src/support/
 
