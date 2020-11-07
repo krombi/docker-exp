@@ -7,8 +7,8 @@ WORKDIR ${CONTAINER_PATH}
 
 COPY . ${CONTAINER_PATH}
 
-RUN go get -u github.com/gorilla/mux \
-    go get -u github.com/gorilla/websocket
+RUN go get -u github.com/gorilla/mux
+RUN go get -u github.com/gorilla/websocket
 
 EXPOSE 8080
 
