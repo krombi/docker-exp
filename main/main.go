@@ -26,6 +26,6 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
 
 	_ = json.Unmarshal([]byte(file), &storage)
 
-	fmt.Fprintf(w, "Hello, my name is %s, and last nama is %s!", storage.Name, storage.LastName)
+	fmt.Fprintf(w, "Hello, my name is %s %s!", storage.Name, storage.LastName)
 
 }
