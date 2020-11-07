@@ -6,5 +6,6 @@ services:
     restart: always
     port:
       - 80:8080
+    hostname: exp.gocrm.ru
     volumes:
       - /Users/krombi/Documents/work/GO/src/support/main/storage:/usr/src/support/storage
