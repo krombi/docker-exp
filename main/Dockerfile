@@ -13,7 +13,7 @@ RUN go get -u github.com/gorilla/websocket
 
 EXPOSE 8080
 
-RUN go build $HOME/go/src/support/main/v1/tickets/ticket.go
+RUN go get support/main/v1/tickets
 RUN go build main.go
 
 CMD ["./main", "&"]
