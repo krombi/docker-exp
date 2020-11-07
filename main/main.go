@@ -8,7 +8,8 @@ import (
 )
 
 type data struct {
-	Name string `json:"name"`
+	Name     string `json:"name"`
+	LastName string `json:"last_name"`
 }
 
 func main() {
@@ -25,6 +26,6 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
 
 	_ = json.Unmarshal([]byte(file), &storage)
 
-	fmt.Fprintf(w, "Hello, my name is %s!", storage.Name)
+	fmt.Fprintf(w, "Hello, my name is %s, and last nama is %s!", storage.Name, storage.LastName)
 
 }
