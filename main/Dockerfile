@@ -1,9 +1,11 @@
 FROM golang:latest
 
-RUN mkdir -p /usr/src/support/
-WORKDIR /usr/src/support/
+ENV GOPATH /go
 
-COPY . /usr/src/support/
+RUN mkdir -p /go/src/support/
+WORKDIR /go/src/support/
+
+COPY . /go/src/support/
 
 RUN go get -u github.com/gorilla/mux
 RUN go get -u github.com/gorilla/websocket
