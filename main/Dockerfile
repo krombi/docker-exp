@@ -12,4 +12,6 @@ RUN go get -u github.com/gorilla/websocket
 
 EXPOSE 8080
 
-CMD ["go", "run", "main.go", "&"]
+RUN go build main.go
+
+CMD ["./main", "&"]
