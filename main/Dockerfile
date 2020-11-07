@@ -1,6 +1,7 @@
 FROM golang:latest
 
-ENV GOPATH $HOME/go
+ENV GOROOT=/usr/local/go
+ENV GOPATH=$HOME/.go
 
 RUN mkdir -p $HOME/go/src/support/
 WORKDIR $HOME/go/src/support/
