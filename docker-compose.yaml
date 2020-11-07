@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  support:
+    build: main/
+    restart: always
+    port:
+      - 80:8080
+    volumes:
+      - /Users/krombi/Documents/work/GO/src/support/main/storage:/usr/src/support/storage

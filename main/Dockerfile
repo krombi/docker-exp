@@ -1,0 +1,12 @@
+FROM golang:latest
+
+RUN mkdir -p /usr/src/support/
+WORKDIR /usr/src/support/
+
+COPY . /usr/src/support/
+
+EXPOSE 8080
+
+RUN go build main.go
+
+CMD ["./main", "&"]
