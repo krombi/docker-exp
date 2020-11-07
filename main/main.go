@@ -1,31 +1,21 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"net/http"
+
+	"support/main/api/v1/tickets"
+
+	"github.com/gorilla/mux"
 )
 
-type data struct {
-	Name     string `json:"name"`
-	LastName string `json:"last_name"`
-}
-
 func main() {
-	http.HandleFunc("/", HelloServer)
+
+	r := mux.NewRouter()
+	V1 := r.PathPrefix("/v1").Subrouter()
+
+	V1.HandleFunc("/tickets", tickets.GetList).Methods("GET", "POST")
+
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		return
 	}
-}
-
-func HelloServer(w http.ResponseWriter, r *http.Request) {
-
-	file, _ := ioutil.ReadFile("./storage/data.json")
-	storage := data{}
-
-	_ = json.Unmarshal([]byte(file), &storage)
-
-	fmt.Fprintf(w, "Hello, my name is %s %s!", storage.Name, storage.LastName)
-
 }
