@@ -24,6 +24,7 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: '9yiUQ7AK46'
+      MYSQL_DATABASE: 'exp_golang'
       MYSQL_USER: 'goexp'
       MYSQL_PASS: 'F76MWx3Px2'
     volumes:
