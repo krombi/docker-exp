@@ -35,8 +35,8 @@ func (db *dbConn) connect(w http.ResponseWriter) {
 
 func getConnection(w http.ResponseWriter) *sql.DB {
 	db := dbConn{
-		user: "goexp",
-		pass: "F76MWx3Px2",
+		user: "root",
+		pass: "9yiUQ7AK46",
 		base: "exp_golang",
 	}
 	db.connect(w)
