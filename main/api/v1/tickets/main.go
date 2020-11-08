@@ -25,18 +25,21 @@ type dbConn struct {
 }
 
 // метод коннекта к базе
-func (db *dbConn) connect() {
-	conn, _ := sql.Open("mysql", db.user+":"+db.pass+"@/"+db.base)
+func (db *dbConn) connect(w http.ResponseWriter) {
+	conn, err := sql.Open("mysql", db.user+":"+db.pass+"@/"+db.base)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+	}
 	db.conn = conn
 }
 
-func getConnection() *sql.DB {
+func getConnection(w http.ResponseWriter) *sql.DB {
 	db := dbConn{
 		user: "goexp",
 		pass: "F76MWx3Px2",
 		base: "exp_golang",
 	}
-	db.connect()
+	db.connect(w)
 	return db.conn
 }
 
@@ -56,11 +59,11 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 
 func Read(w http.ResponseWriter, r *http.Request) {
 
-	db := getConnection()
+	db := getConnection(w)
 
-	tickets, createErr := db.Query("SELECT * FROM tickets")
-	if createErr != nil {
-		return
+	tickets, err := db.Query("SELECT * FROM tickets")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
 	}
 
 	for tickets.Next() {
@@ -78,11 +81,11 @@ func Read(w http.ResponseWriter, r *http.Request) {
 
 func Create(w http.ResponseWriter, r *http.Request) {
 
-	db := getConnection()
+	db := getConnection(w)
 
-	_, createErr := db.Query("CREATE TABLE `tickets` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `url` varchar(50) NOT NULL)")
-	if createErr != nil {
-		return
+	_, err := db.Query("CREATE TABLE `tickets` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `url` varchar(50) NOT NULL)")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
 	}
 
 	fmt.Fprintf(w, "Creating")
@@ -91,10 +94,10 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 func Add(w http.ResponseWriter, r *http.Request) {
 
-	db := getConnection()
-	_, createErr := db.Query("INSERT INTO tickets (url) VALUES ('basement')")
-	if createErr != nil {
-		return
+	db := getConnection(w)
+	_, err := db.Query("INSERT INTO tickets (url) VALUES ('basement')")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
 	}
 
 	fmt.Fprintf(w, "Added")
