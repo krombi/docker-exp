@@ -15,8 +15,28 @@ type data struct {
 	LastName string `json:"last_name"`
 }
 
-func init() {
+// структура соединения с базой данных
+type dbConn struct {
+	user string
+	pass string
+	base string
+	conn *sql.DB
+}
 
+// метод коннекта к базе
+func (db *dbConn) connect() {
+	conn, _ := sql.Open("mysql", db.user+":"+db.pass+"@/"+db.base)
+	db.conn = conn
+}
+
+func getConnection() *sql.DB {
+	db := dbConn{
+		user: "goexp",
+		pass: "F76MWx3Px2",
+		base: "exp_golang",
+	}
+	db.connect()
+	return db.conn
 }
 
 func GetList(w http.ResponseWriter, r *http.Request) {
@@ -35,10 +55,11 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 
 func Read(w http.ResponseWriter, r *http.Request) {
 
-	db, err := sql.Open("mysql", "goexp:F76MWx3Px2@/exp_golang")
-	if err != nil {
-		return
-	}
+}
+
+func Create() {
+
+	db := getConnection()
 
 	_, createErr := db.Query("CREATE TABLE `tickets` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY, `url` varchar(50) NOT NULL)")
 	if createErr != nil {
