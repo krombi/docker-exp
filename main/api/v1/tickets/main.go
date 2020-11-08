@@ -85,6 +85,8 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Fprintf(w, "Creating")
+
 }
 
 func Add(w http.ResponseWriter, r *http.Request) {
@@ -94,5 +96,7 @@ func Add(w http.ResponseWriter, r *http.Request) {
 	if createErr != nil {
 		return
 	}
+
+	fmt.Fprintf(w, "Added")
 
 }
