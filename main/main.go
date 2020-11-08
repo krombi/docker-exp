@@ -25,7 +25,7 @@ func main() {
 
 	V1.HandleFunc("/tickets", tickets.GetList).Methods("GET", "POST")
 	V1.HandleFunc("/ticket/create", tickets.Create).Methods("GET", "POST")
-	V1.HandleFunc("/ticket/{id:(0-9)*}", tickets.Read).Methods("GET", "POST")
+	V1.HandleFunc("/ticket/{id:[0-9]+}", tickets.Read).Methods("GET", "POST")
 
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		return
