@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -54,6 +55,24 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 }
 
 func Read(w http.ResponseWriter, r *http.Request) {
+
+	db := getConnection()
+
+	tickets, createErr := db.Query("SELECT * FROM tickets")
+	if createErr != nil {
+		return
+	}
+
+	for tickets.Next() {
+		var (
+			id  int
+			url string
+		)
+		if err := tickets.Scan(&id, &url); err != nil {
+			log.Fatal(err)
+		}
+		log.Println(id, url)
+	}
 
 }
 
