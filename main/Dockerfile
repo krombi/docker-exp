@@ -3,17 +3,16 @@ FROM golang:latest
 ENV GOROOT=/usr/local/go
 ENV GOPATH=$HOME/go
 
-RUN mkdir -p $HOME/go/src/support/
-WORKDIR $HOME/go/src/support/
+RUN mkdir -p $GOPATH/src/support/
+WORKDIR $GOPATH/src/support/
 
-COPY . $HOME/go/src/support/
+COPY . $GOPATH/src/support/
 
 RUN go get -u github.com/gorilla/mux
 RUN go get -u github.com/gorilla/websocket
 
 EXPOSE 8080
 
-RUN go get support/main/v1/tickets
-RUN go build main.go
+RUN go build
 
-CMD ["./main", "&"]
+CMD ["go", "run", "&"]
