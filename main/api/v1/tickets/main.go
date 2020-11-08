@@ -57,7 +57,7 @@ func Read(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func Create() {
+func Create(w http.ResponseWriter, r *http.Request) {
 
 	db := getConnection()
 
