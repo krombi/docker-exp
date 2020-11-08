@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"support/main/api/v1/tickets"
+	"./api/v1/tickets"
 
 	"github.com/gorilla/mux"
 )
