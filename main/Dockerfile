@@ -7,6 +7,7 @@ COPY . /app/support/
 
 RUN go get -u github.com/gorilla/mux
 RUN go get -u github.com/gorilla/websocket
+RUN go get -u github.com/go-sql-driver/mysql
 
 EXPOSE 8080
 
