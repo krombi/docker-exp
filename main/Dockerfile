@@ -8,11 +8,11 @@ WORKDIR $GOPATH/src/support/
 
 COPY . $GOPATH/src/support/
 
-RUN cd /
-RUN ls
-
 RUN go get -u github.com/gorilla/mux
 RUN go get -u github.com/gorilla/websocket
+
+RUN cd /
+RUN ls
 
 EXPOSE 8080
 
