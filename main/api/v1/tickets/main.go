@@ -26,7 +26,7 @@ type dbConn struct {
 
 // метод коннекта к базе
 func (db *dbConn) connect(w http.ResponseWriter) {
-	conn, err := sql.Open("mysql", db.user+":"+db.pass+"@/"+db.base)
+	conn, err := sql.Open("mysql", db.user+":"+db.pass+"@tcp(db_mysql)/"+db.base)
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
