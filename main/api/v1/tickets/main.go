@@ -67,3 +67,13 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+func Add(w http.ResponseWriter, r *http.Request) {
+
+	db := getConnection()
+	_, createErr := db.Query("INSERT INTO tickets (url) VALUES ('basement')")
+	if createErr != nil {
+		return
+	}
+
+}
