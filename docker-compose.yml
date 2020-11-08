@@ -1,11 +1,30 @@
 version: "3"
 
+volumes:
+  db_mysql:
+
 services:
   support:
+    container_name: support_app
     build: main/
     restart: always
     ports:
       - 80:8080
+      - 443:443
     hostname: exp.gocrm.ru
     volumes:
       - ./storage:/storage
+
+  # mysql experiment
+  mysql:
+    container_name: mysql_storage
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: '9yiUQ7AK46'
+      MYSQL_USER: 'goexp'
+      MYSQL_PASS: 'F76MWx3Px2'
+    volumes:
+      - db_mysql:/var/lib/mysql
