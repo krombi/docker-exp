@@ -61,12 +61,16 @@ func Read(w http.ResponseWriter, r *http.Request) {
 
 	db := getConnection(w)
 
-	tickets, err := db.Query("SELECT * FROM tickets")
+	tickets, err := db.Query("SELECT * FROM `tickets`")
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
 
+	log.Println("24")
+
 	if tickets != nil {
+
+		log.Println("453")
 
 		for tickets.Next() {
 			log.Println("11")
@@ -100,7 +104,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 func Add(w http.ResponseWriter, r *http.Request) {
 
 	db := getConnection(w)
-	_, err := db.Query("INSERT INTO tickets (url) VALUES ('basement')")
+	_, err := db.Query("INSERT INTO `tickets` (`url`) VALUES ('basement')")
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
