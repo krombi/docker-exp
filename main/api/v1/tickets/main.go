@@ -66,14 +66,9 @@ func Read(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, err.Error())
 	}
 
-	fmt.Fprintf(w, "jv0r3")
-
 	if tickets != nil {
 
-		fmt.Fprintf(w, "p093wgo")
-
 		for tickets.Next() {
-			fmt.Fprintf(w, "q30e")
 			var (
 				id  int
 				url string
@@ -81,7 +76,10 @@ func Read(w http.ResponseWriter, r *http.Request) {
 			if err := tickets.Scan(&id, &url); err != nil {
 				log.Fatal(err)
 			}
-			log.Println(id, url)
+			_, err := fmt.Fprintln(w, "Order from tickets with id=%d and url=%s!", id, url)
+			if err != nil {
+				return
+			}
 		}
 
 	}
