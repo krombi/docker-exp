@@ -76,7 +76,7 @@ func Read(w http.ResponseWriter, r *http.Request) {
 			if err := tickets.Scan(&id, &url); err != nil {
 				log.Fatal(err)
 			}
-			_, err := fmt.Fprintln(w, "Order from tickets with id=%d and url=%s!", id, url)
+			_, err := fmt.Fprintln(w, "Order from tickets with id=", id, " and url=", url, "!")
 			if err != nil {
 				return
 			}
