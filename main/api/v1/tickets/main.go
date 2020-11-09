@@ -57,8 +57,13 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 
 }
 
+type ticket struct {
+	ident int    `db:"id"`
+	path  string `db:"url"`
+}
+
 func Read(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "134da")
+
 	db := getConnection(w)
 
 	tickets, err := db.Query("SELECT * FROM `tickets`")
@@ -69,14 +74,11 @@ func Read(w http.ResponseWriter, r *http.Request) {
 	if tickets != nil {
 
 		for tickets.Next() {
-			var (
-				id  int
-				url string
-			)
-			if err := tickets.Scan(&id, &url); err != nil {
+			res := ticket{}
+			if err := tickets.Scan(&res); err != nil {
 				log.Fatal(err)
 			}
-			_, err := fmt.Fprintln(w, "Order from tickets with id=", id, " and url=", url, "!")
+			_, err := fmt.Fprintln(w, "Order from tickets with id=", res.ident, " and url=", res.path, "!")
 			if err != nil {
 				return
 			}
