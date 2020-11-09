@@ -66,15 +66,20 @@ func Read(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, err.Error())
 	}
 
-	for tickets.Next() {
-		var (
-			id  int
-			url string
-		)
-		if err := tickets.Scan(&id, &url); err != nil {
-			log.Fatal(err)
+	if tickets != nil {
+
+		for tickets.Next() {
+			log.Println("11")
+			var (
+				id  int
+				url string
+			)
+			if err := tickets.Scan(&id, &url); err != nil {
+				log.Fatal(err)
+			}
+			log.Println(id, url)
 		}
-		log.Println(id, url)
+
 	}
 
 }
