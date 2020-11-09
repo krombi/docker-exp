@@ -58,7 +58,7 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 }
 
 func Read(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Fprintf(w, "134da")
 	db := getConnection(w)
 
 	tickets, err := db.Query("SELECT * FROM `tickets`")
@@ -66,14 +66,14 @@ func Read(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, err.Error())
 	}
 
-	log.Println("24")
+	fmt.Fprintf(w, "jv0r3")
 
 	if tickets != nil {
 
-		log.Println("453")
+		fmt.Fprintf(w, "p093wgo")
 
 		for tickets.Next() {
-			log.Println("11")
+			fmt.Fprintf(w, "q30e")
 			var (
 				id  int
 				url string
