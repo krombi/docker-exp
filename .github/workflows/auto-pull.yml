@@ -24,7 +24,7 @@ jobs:
           
       - name: Connect with ssh
         run: |
-          ssh -i ~/.ssh/private root@89.223.125.17
+          ssh -i -T ~/.ssh/private root@89.223.125.17
           ls
           exit
           
