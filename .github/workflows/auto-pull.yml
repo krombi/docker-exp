@@ -19,8 +19,8 @@ jobs:
       - name: Upload ssh-key
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_HOST_KEY }}" > ../private
-          sudo chmod 600 ../private
+          echo "${{ secrets.SSH_HOST_KEY }}" > ~/.ssh/private
+          sudo chmod 600 ~/.ssh/private
           
       - name: Connect with ssh
         run: |
