@@ -14,13 +14,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      
-      - name: Upload ssh-key
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_HOST_KEY }}" > ~/.ssh/private
-          sudo chmod 600 ~/.ssh/private
-          
-      - name: Check key
-        run: cat ~/.ssh/private          
+      -   uses: actions/checkout@v1
+
+      -   name: Setup SSH Keys and known_hosts
+          env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add - <<< "${{ secrets.SSH_HOST_KEY }}"
+
+      -   name: Some task that fetches dependencies
+          env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          run: ./fetch-deps.sh        
