@@ -22,12 +22,5 @@ jobs:
           echo "${{ secrets.SSH_HOST_KEY }}" > ~/.ssh/private
           sudo chmod 600 ~/.ssh/private
           
-      - name: Ping server
-        run: ping 89.223.125.17
-          
-      - name: Connect with ssh
-        run: |
-          ssh -i -T ~/.ssh/private root@89.223.125.17
-          ls
-          exit
-          
+      - name: Check key
+        run: cat ~/.ssh/private          
