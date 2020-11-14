@@ -58,15 +58,15 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 }
 
 type ticket struct {
-	id  int
-	url string
+	ident int    `db:"id"`
+	path  string `db:"url"`
 }
 
 func Read(w http.ResponseWriter, r *http.Request) {
 
 	db := getConnection(w)
 
-	tickets, err := db.Query("SELECT * FROM `tickets`")
+	tickets, err := db.Query("SELECT id, url FROM `tickets`")
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
@@ -78,7 +78,7 @@ func Read(w http.ResponseWriter, r *http.Request) {
 			if err := tickets.Scan(&res); err != nil {
 				log.Fatal(err)
 			}
-			_, err := fmt.Fprintln(w, "Order from tickets with id=", res.id, " and url=", res.url, "!")
+			_, err := fmt.Fprintln(w, "Order from tickets with id=", res.ident, " and url=", res.path, "!")
 			if err != nil {
 				return
 			}
